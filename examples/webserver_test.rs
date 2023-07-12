@@ -20,7 +20,7 @@ async fn main() -> Result<()> {
     let req_login = hc.do_post(
         "/api/login",
         json!({
-            "username": "admin",
+            "username": "client",
             "pwd": "123456",
         }),
     );
@@ -30,7 +30,7 @@ async fn main() -> Result<()> {
     hc.do_post(
         "/api/tickets",
         json!({
-            "name": "First Ticket",
+            "name": "Failed Ticket",
         }),
     )
     .await?
@@ -38,6 +38,25 @@ async fn main() -> Result<()> {
     .await?;
 
     hc.do_get("/api/tickets").await?.print().await?;
+
+    let req_login = hc.do_post(
+        "/api/login",
+        json!({
+            "username": "admin",
+            "pwd": "123456",
+        }),
+    );
+    req_login.await?.print().await?;
+
+    hc.do_post(
+        "/api/tickets",
+        json!({
+            "name": "Success Ticket",
+        }),
+    )
+    .await?
+    .print()
+    .await?;
 
     Ok(())
 }
