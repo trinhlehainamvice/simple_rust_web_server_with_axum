@@ -11,7 +11,7 @@ pub fn route() -> Router {
 }
 
 async fn api_login(cookies: Cookies, payload: Json<LoginPayload>) -> Result<Json<Value>> {
-    println!("->> {:<12} - api_login", "METHOD_ROUTER");
+    println!("->> {:<12} - api_login", "HANDLER");
 
     // TODO: database auth
     if payload.username != "admin" || payload.pwd != "123456" {

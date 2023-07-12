@@ -1,5 +1,4 @@
 pub mod login_router;
-
-pub use login_router::route;
+pub mod ticket_router;
 
 pub const AUTH_TOKEN: &str = "auth_token";

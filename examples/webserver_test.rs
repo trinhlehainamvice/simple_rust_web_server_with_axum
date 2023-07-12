@@ -27,5 +27,17 @@ async fn main() -> Result<()> {
     req_login.await?.print().await?;
     hc.do_get("/hello?name=John").await?.print().await?;
 
+    hc.do_post(
+        "/api/tickets",
+        json!({
+            "name": "First Ticket",
+        }),
+    )
+    .await?
+    .print()
+    .await?;
+
+    hc.do_get("/api/tickets").await?.print().await?;
+
     Ok(())
 }

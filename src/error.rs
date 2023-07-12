@@ -6,6 +6,8 @@ pub type Result<T> = std::result::Result<T, Error>;
 #[derive(Debug)]
 pub enum Error {
     LoginFailed,
+
+    DeleteTicketFailed { id: u64 },
 }
 
 impl IntoResponse for Error {
