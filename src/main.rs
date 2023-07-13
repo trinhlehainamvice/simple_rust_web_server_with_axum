@@ -40,12 +40,14 @@ async fn main() {
         // REQUEST Layer Head
         .fallback_service(static_routers());
 
+    // region --Create Server--
     let addr = SocketAddr::from(([127, 0, 0, 1], 8080));
     println!("LISTENING on {addr}");
     Server::bind(&addr)
         .serve(router.into_make_service())
         .await
         .unwrap()
+    // endregion --Create Server--
 }
 
 async fn main_response_mapper(
@@ -74,6 +76,7 @@ fn static_routers() -> Router {
     Router::new().nest_service("/", get_service(ServeDir::new("./")))
 }
 
+// region --Hello Routers--
 #[derive(Debug, Deserialize)]
 struct HelloParams {
     name: Option<String>,
@@ -104,3 +107,4 @@ async fn hello_extract_path_handler(Path(name): Path<String>) -> impl IntoRespon
     );
     Html(format!("<h1>Hello {name}</h1>"))
 }
+// endregion --Hello Routers--
