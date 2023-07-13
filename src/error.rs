@@ -3,12 +3,12 @@ use axum::response::{IntoResponse, Response};
 
 pub type Result<T> = std::result::Result<T, Error>;
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub enum Error {
     LoginFailed,
-
     AuthFailedEmptyTokenCookie,
-    AuthFailedInvalidToken,
+    AuthFailedEmptyCookie,
+    AuthFailedInvalidUserIdTokenType,
     DeleteTicketFailed { id: u64 },
 }
 
